@@ -13,20 +13,19 @@ function Event(obj) {
 }
 
 
-Event.prototype.on = function(name, callback) {
-	var list = this._cbs[name] || (this._cbs[name] = []);
-	list.push(callback);
+Event.prototype.on = function(name, cb) {
+	(this._cbs[name] || (this._cbs[name] = [])).push(cb);
 };
 
 
 Event.prototype.off = function(name, cb) {
-	var index;
+	var i, cbs;
 
 	if (!name) return this._cbs = {};
 	if (!cb) return delete this._cbs[name];
 
-	var cbs = this._cbs[name] || [];
-	while (cbs && ~(index = cbs.indexOf(cb))) cbs.splice(index, 1);
+	cbs = this._cbs[name] || [];
+	while (cbs && ~(i = cbs.indexOf(cb))) cbs.splice(i, 1);
 };
 
 

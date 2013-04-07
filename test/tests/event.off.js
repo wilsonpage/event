@@ -1,6 +1,5 @@
 
 buster.testCase('Event#off()', {
-  setUp: function(){},
 
   "Should remove callback when passed": function() {
     var emitter = new Event();
@@ -38,9 +37,24 @@ buster.testCase('Event#off()', {
     refute.defined(emitter._cbs[name]);
   },
 
-  "Should remove all callbacks when no callback or name is defined": function() {
+  "Should be chainable": function() {
+    var emitter = new Event();
+    var callback = this.spy();
+    var callback2 = this.spy();
 
-  },
+    emitter
+      .on('eventname', callback)
+      .on('eventname2', callback2);
 
-  tearDown: function(){}
+    emitter
+      .off('eventname', callback)
+      .off('eventname2', callback2);
+
+    emitter
+      .fire('eventname')
+      .fire('eventname2');
+
+    assert.isFalse(callback.called);
+    assert.isFalse(callback2.called);
+  }
 });

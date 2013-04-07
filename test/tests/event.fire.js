@@ -32,5 +32,18 @@ buster.testCase('Event#fire()', {
   "Should be able to fire and event name without any `.on()` listeners being registered": function() {
     var emitter = new Event();
     emitter.fire('eventname');
+  },
+
+  "Should be chainable": function() {
+    var emitter = new Event();
+    var callback = this.spy();
+
+    emitter.on('eventname', callback);
+
+    emitter
+      .fire('eventname')
+      .fire('eventname');
+
+    assert.isTrue(callback.calledTwice);
   }
 });

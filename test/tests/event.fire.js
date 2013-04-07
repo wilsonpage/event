@@ -27,5 +27,10 @@ buster.testCase('Event#fire()', {
     emitter.fire(name, arg1, arg2);
 
     assert.isTrue(callback.calledWith(arg1, arg2));
+  },
+
+  "Should be able to fire and event name without any `.on()` listeners being registered": function() {
+    var emitter = new Event();
+    emitter.fire('eventname');
   }
 });

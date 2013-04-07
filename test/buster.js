@@ -4,7 +4,7 @@ config["FruitMachineTests"] = {
 	rootPath: '../',
 	environment: "browser",
 	sources: [
-		'lib/event.js'
+		'build/event.js'
 	],
 	tests: [
 		'test/tests/*.js'

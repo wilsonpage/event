@@ -1,5 +1,5 @@
 {
-  "name": "Event",
+  "name": "event",
   "version": "0.1.0",
   "description": "Tiny event emitter",
   "main": "lib/event.js",

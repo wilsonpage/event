@@ -9,6 +9,10 @@
   "scripts": {
     "test": "node_modules/.bin/buster-test -c test/buster.js"
   },
+  "contributors": [
+      "Wilson Page",
+      "Matt Andrews"
+    ],
   "repository": "",
   "author": "Wilson Page",
   "license": "MIT",

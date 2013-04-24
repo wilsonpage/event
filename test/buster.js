@@ -1,6 +1,6 @@
 var config = module.exports;
 
-config["FruitMachineTests"] = {
+config["EventTests"] = {
 	rootPath: '../',
 	environment: "browser",
 	sources: [

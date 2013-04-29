@@ -40,6 +40,14 @@ buster.testCase('Event#fire()', {
     refute.called(spy);
   },
 
+  "Should not create a namespace (only Event#on should create namespaces)": function() {
+    var emitter = new Event();
+
+    emitter.fire('eventname');
+
+    refute.defined(emitter._cbs['eventname']);
+  },
+
   "Should be chainable": function() {
     var emitter = new Event();
     var callback = this.spy();

@@ -1,6 +1,6 @@
 {
   "name": "event",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Tiny event emitter",
   "main": "lib/event.js",
   "directories": {
@@ -10,9 +10,9 @@
     "test": "node_modules/.bin/buster-test -c test/buster.js"
   },
   "contributors": [
-      "Wilson Page",
-      "Matt Andrews"
-    ],
+    "Wilson Page",
+    "Matt Andrews"
+  ],
   "repository": "",
   "author": "Wilson Page",
   "license": "MIT",

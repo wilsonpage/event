@@ -59,5 +59,17 @@ buster.testCase('Event#fire()', {
       .fire('eventname');
 
     assert.isTrue(callback.calledTwice);
+  },
+
+  "Should fire in the order they were bound": function() {
+    var emitter = new Event();
+    var callback1 = this.spy();
+    var callback2 = this.spy();
+
+    emitter.on('eventname', callback1);
+    emitter.on('eventname', callback2);
+    emitter.fire('eventname');
+
+    assert.callOrder(callback1, callback2);
   }
 });

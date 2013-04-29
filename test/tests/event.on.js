@@ -22,8 +22,8 @@ buster.testCase('Event#on()', {
     emitter.on(name, callback2);
 
     assert.equals(emitter._cbs[name].length, 2);
-    assert.equals(emitter._cbs[name][0], callback1);
-    assert.equals(emitter._cbs[name][1], callback2);
+    assert.equals(emitter._cbs[name][1], callback1);
+    assert.equals(emitter._cbs[name][0], callback2);
   },
 
   "Should be chainable": function() {

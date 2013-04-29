@@ -35,7 +35,7 @@ var Event = module.exports = function(obj) {
  */
 Event.prototype.on = function(name, cb) {
 	this._cbs = this._cbs || {};
-	(this._cbs[name] || (this._cbs[name] = [])).push(cb);
+	(this._cbs[name] || (this._cbs[name] = [])).unshift(cb);
 	return this;
 };
 
@@ -71,12 +71,14 @@ Event.prototype.off = function(name, cb) {
  */
 Event.prototype.fire = function(name) {
 	this._cbs = this._cbs || {};
+	var cbs = this._cbs[name];
 
-	var cbs = (this._cbs[name] || (this._cbs[name] = []));
-	var args = [].slice.call(arguments, 1);
-	var l = cbs.length;
+	if (cbs) {
+		var args = [].slice.call(arguments, 1);
+		var l = cbs.length;
+		while (l--) cbs[l].apply(this, args);
+	}
 
-	while (l--) cbs[l].apply(null, args);
 	return this;
 };
 

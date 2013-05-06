@@ -71,5 +71,18 @@ buster.testCase('Event#fire()', {
     emitter.fire('eventname');
 
     assert.callOrder(callback1, callback2);
+  },
+
+  "Should able to define the context on which to fire": function() {
+    var emitter = new Event();
+    var ctx = { overriden: 'context' };
+    var callback1 = this.spy();
+    var callback2 = this.spy();
+
+    emitter.on('eventname', function() {
+      assert(this.overriden === 'context');
+    });
+
+    emitter.fire({ name: 'eventname', ctx: ctx });
   }
 });

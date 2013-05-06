@@ -21,8 +21,8 @@ return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require
  * @return {Object}
  */
 var Event = module.exports = function(obj) {
-	if (!(this instanceof Event)) return new Event(obj);
-	if (obj) return mixin(obj, Event.prototype);
+  if (!(this instanceof Event)) return new Event(obj);
+  if (obj) return mixin(obj, Event.prototype);
 };
 
 /**
@@ -34,9 +34,9 @@ var Event = module.exports = function(obj) {
  * @return {Event}
  */
 Event.prototype.on = function(name, cb) {
-	this._cbs = this._cbs || {};
-	(this._cbs[name] || (this._cbs[name] = [])).unshift(cb);
-	return this;
+  this._cbs = this._cbs || {};
+  (this._cbs[name] || (this._cbs[name] = [])).unshift(cb);
+  return this;
 };
 
 /**
@@ -49,16 +49,16 @@ Event.prototype.on = function(name, cb) {
  * @return {Event}
  */
 Event.prototype.off = function(name, cb) {
-	this._cbs = this._cbs || {};
+  this._cbs = this._cbs || {};
 
-	if (!name) return this._cbs = {};
-	if (!cb) return delete this._cbs[name];
+  if (!name) return this._cbs = {};
+  if (!cb) return delete this._cbs[name];
 
-	var cbs = this._cbs[name] || [];
-	var i;
+  var cbs = this._cbs[name] || [];
+  var i;
 
-	while (cbs && ~(i = cbs.indexOf(cb))) cbs.splice(i, 1);
-	return this;
+  while (cbs && ~(i = cbs.indexOf(cb))) cbs.splice(i, 1);
+  return this;
 };
 
 /**
@@ -69,17 +69,19 @@ Event.prototype.off = function(name, cb) {
  * @param  {String} name
  * @return {Event}
  */
-Event.prototype.fire = function(name) {
-	this._cbs = this._cbs || {};
-	var cbs = this._cbs[name];
+Event.prototype.fire = function(options) {
+  this._cbs = this._cbs || {};
+  var name = options.name || name;
+  var ctx = options.ctx || this;
+  var cbs = this._cbs[name];
 
-	if (cbs) {
-		var args = [].slice.call(arguments, 1);
-		var l = cbs.length;
-		while (l--) cbs[l].apply(this, args);
-	}
+  if (cbs) {
+    var args = [].slice.call(arguments, 1);
+    var l = cbs.length;
+    while (l--) cbs[l].apply(ctx, args);
+  }
 
-	return this;
+  return this;
 };
 
 /**

@@ -12,6 +12,18 @@ return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require
  */
 
 /**
+ * Locals
+ */
+
+var proto = Event.prototype;
+
+/**
+ * Expose `Event`
+ */
+
+module.exports = Event;
+
+/**
  * Creates a new event emitter
  * instance, or if passed an
  * object, mixes the event logic
@@ -20,10 +32,10 @@ return (function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require
  * @param  {Object} obj
  * @return {Object}
  */
-var Event = module.exports = function(obj) {
+function Event(obj) {
   if (!(this instanceof Event)) return new Event(obj);
-  if (obj) return mixin(obj, Event.prototype);
-};
+  if (obj) return mixin(obj, proto);
+}
 
 /**
  * Registers a callback
@@ -33,7 +45,7 @@ var Event = module.exports = function(obj) {
  * @param  {Function} cb
  * @return {Event}
  */
-Event.prototype.on = function(name, cb) {
+proto.on = function(name, cb) {
   this._cbs = this._cbs || {};
   (this._cbs[name] || (this._cbs[name] = [])).unshift(cb);
   return this;
@@ -48,7 +60,7 @@ Event.prototype.on = function(name, cb) {
  * @param  {Function} cb
  * @return {Event}
  */
-Event.prototype.off = function(name, cb) {
+proto.off = function(name, cb) {
   this._cbs = this._cbs || {};
 
   if (!name) return this._cbs = {};
@@ -69,7 +81,7 @@ Event.prototype.off = function(name, cb) {
  * @param  {String} name
  * @return {Event}
  */
-Event.prototype.fire = function(options) {
+proto.fire = function(options) {
   this._cbs = this._cbs || {};
   var name = options.name || options;
   var ctx = options.ctx || this;

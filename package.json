@@ -9,6 +9,10 @@
   "scripts": {
     "test": "node_modules/buster/bin/buster-test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wilsonpage/event.git"
+  },
   "contributors": [
     "Wilson Page",
     "Matt Andrews"
